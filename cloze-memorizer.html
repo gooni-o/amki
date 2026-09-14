@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>문장 암기장</title>
+  <!-- React 및 ReactDOM CDN -->
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  <!-- Babel Standalone CDN -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+  <div id="root"></div>
+
+  <!-- Lucide 아이콘 글로벌 객체 생성 (오류 방지) -->
+  <script>
+    window.LucideIcons = {
+      ArrowLeft: () => React.createElement('span', null, '←'),
+      ArrowRight: () => React.createElement('span', null, '→'),
+      Shuffle: () => React.createElement('span', null, '🔀'),
+      RotateCcw: () => React.createElement('span', null, '🔄'),
+      Check: () => React.createElement('span', null, '✓'),
+      X: () => React.createElement('span', null, '✕')
+    };
+  </script>
+
+  <!-- React JSX 컴포넌트 로드 -->
+  <script type="text/babel" data-presets="react" src="./cloze-memorizer.jsx"></script>
+
+  <!-- 메인 렌더링 스크립트 -->
+  <script type="text/babel">
+    window.addEventListener('DOMContentLoaded', () => {
+      const rootElement = document.getElementById('root');
+      if (rootElement) {
+        const root = ReactDOM.createRoot(rootElement);
+        if (typeof ClozeMemorizer !== 'undefined') {
+          root.render(<ClozeMemorizer />);
+        } else if (typeof App !== 'undefined') {
+          root.render(<App />);
+        } else {
+          rootElement.innerHTML = '<div style="padding: 20px; color: red;">컴포넌트를 불러올 수 없습니다.</div>';
+        }
+      }
+    });
+  </script>
+</body>
+</html>
